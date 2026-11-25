@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#102d31"><meta name="description" content="Sri Lanka next-day rainfall prediction dashboard">
+  <title>RainScope | Sri Lanka Rainfall Prediction</title>
+  <link rel="stylesheet" href="styles.css"><script type="module" src="app.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to dashboard</a>
+<div class="shell">
+  <aside class="sidebar" id="sidebar">
+    <a href="#overview" class="brand"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 40 40"><path d="M20 5C15 13 9 19 9 25a11 11 0 0 0 22 0C31 19 25 13 20 5Z" fill="none" stroke="currentColor" stroke-width="2.7"/><path d="M14 26c2 4 6 5 9 3M23 11l6 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg></span><span>RainScope<span class="brand-sub">SRI LANKA / ML WEATHER</span></span></a>
+    <p class="nav-caption">WORKSPACE</p>
+    <nav aria-label="Main navigation">
+      <a class="nav-link active" href="#overview"><span data-icon="grid"></span> Overview</a>
+      <a class="nav-link" href="#prediction"><span data-icon="cloud"></span> Prediction</a>
+      <a class="nav-link" href="#trends"><span data-icon="chart"></span> Rainfall trends</a>
+      <a class="nav-link" href="#regions"><span data-icon="pin"></span> Region explorer</a>
+      <a class="nav-link" href="#about"><span data-icon="info"></span> About the project</a>
+    </nav>
+    <div class="side-bottom"><div class="side-note"><span class="signal"></span><strong id="sidebar-mode">Demo workspace</strong><p id="sidebar-note">Explore sample predictions before the trained model is connected.</p></div><span class="side-foot">RAINSCOPE / v1.0</span></div>
+  </aside>
+  <main id="main">
+    <header class="topbar"><div class="breadcrumb"><button id="menu" class="icon-button mobile-menu" aria-label="Toggle navigation" aria-expanded="false"><span data-icon="menu"></span></button><span>Workspace</span><span class="slash">/</span><strong>Dashboard</strong></div><div class="top-actions"><span class="date-label"><span data-icon="calendar"></span><span id="today"></span></span><button class="icon-button" id="theme" aria-label="Switch color theme" title="Switch color theme"><span data-icon="moon"></span></button><button id="download" class="button secondary"><span data-icon="download"></span><span>Export</span></button></div></header>
+    <section class="intro" id="overview"><div><p class="eyebrow"><span class="tiny-dot"></span> WEATHER INTELLIGENCE / SRI LANKA</p><h1>Rainfall, reimagined<span>.</span></h1><p class="intro-copy">Explore next-day rainfall estimates and regional weather patterns across the island.</p></div><div class="mode-pill" id="mode"><span></span> Demo data · Not live weather</div></section>
+    <section class="hero-grid" id="prediction" aria-label="Next-day prediction">
+      <article class="hero"><div class="hero-art" aria-hidden="true"><svg viewBox="0 0 360 270" fill="none"><defs><linearGradient id="cloudGrad" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#e2fff1"/><stop offset="1" stop-color="#5aa9a6"/></linearGradient><linearGradient id="rainGrad" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#a5f0d1"/><stop offset="1" stop-color="#a5f0d1" stop-opacity="0"/></linearGradient></defs><circle cx="214" cy="110" r="98" stroke="#76b4a6" stroke-opacity=".24"/><circle cx="214" cy="110" r="123" stroke="#76b4a6" stroke-opacity=".15"/><circle cx="214" cy="110" r="148" stroke="#76b4a6" stroke-opacity=".1"/><path d="M93 157h186a39 39 0 0 0 0-78h-5a62 62 0 0 0-117-12 48 48 0 0 0-64 90Z" fill="#163f41" transform="translate(9 13)"/><path d="M93 151h186a39 39 0 0 0 0-78h-5a62 62 0 0 0-117-12 48 48 0 0 0-64 90Z" fill="url(#cloudGrad)"/><path d="M118 175l-18 52M169 174l-25 74M220 175l-18 52M268 174l-25 74" stroke="url(#rainGrad)" stroke-width="8" stroke-linecap="round"/><path d="M318 37v16m-8-8h16M72 44v10m-5-5h10" stroke="#a9e0c6" stroke-width="2" stroke-linecap="round"/></svg></div><div class="hero-content"><p class="hero-eyebrow"><span data-icon="cloud"></span> NEXT-DAY ESTIMATE</p><h2 id="hero-location">Colombo, Western</h2><p class="hero-date" id="target-date"></p><div class="rain-value"><span id="amount">—</span><span class="unit">mm</span></div><div class="hero-status"><span class="status-dot"></span><span id="condition">—</span></div><p class="hero-note" id="hero-note">Illustrative rainfall amount, not an operational forecast.</p></div></article>
+      <article class="panel prediction-panel"><div class="panel-heading"><span class="panel-icon" data-icon="sliders"></span><div><h2>Generate prediction</h2><p>Choose a location to explore.</p></div></div><form id="prediction-form"><label for="location">Location / district</label><div class="select-wrap"><span data-icon="pin"></span><select id="location" name="location"></select></div><label for="forecast-date">Forecast date (next day)</label><div class="date-field"><span data-icon="calendar"></span><input id="forecast-date" type="text" readonly></div><button class="button primary" id="predict" type="submit"><span data-icon="spark"></span><span id="predict-label">Generate estimate</span><span class="push" data-icon="arrow"></span></button></form><div id="feedback" class="feedback" role="status" aria-live="polite"></div><p class="panel-note"><span data-icon="info"></span><span id="form-note">Demo mode uses sample values, not a trained ML model.</span></p></article>
+    </section>
+    <section class="metric-grid" aria-label="Prediction details">
+      <article class="metric"><span class="metric-icon" data-icon="drop"></span><p>Estimated rainfall</p><div><strong id="metric-rain">—</strong><small>mm</small></div><span class="metric-hint">Next-day total</span></article>
+      <article class="metric"><span class="metric-icon" data-icon="layers"></span><p>Rainfall category</p><div><strong id="metric-category" class="metric-word">—</strong></div><span class="metric-hint">UI-defined intensity band</span></article>
+      <article class="metric"><span class="metric-icon" data-icon="pin"></span><p>Selected province</p><div><strong id="metric-province" class="metric-word">—</strong></div><span class="metric-hint">Sri Lanka</span></article>
+      <article class="metric"><span class="metric-icon" data-icon="cpu"></span><p>Prediction source</p><div><strong id="metric-source" class="metric-word">Demo</strong></div><span class="metric-hint" id="model-hint">Illustrative dataset</span></article>
+    </section>
+    <section class="detail-grid" id="trends"><article class="panel chart-panel"><div class="section-heading"><div><p class="section-kicker">RAINFALL ANALYTICS</p><h2>Rainfall outlook</h2><p id="chart-sub">Sample history and next-day estimate</p></div><select id="range" aria-label="Chart time range"><option value="7">Last 7 days</option><option value="14">Last 14 days</option></select></div><div id="chart" class="chart" role="img" aria-label="Illustrative rainfall bar chart"></div><div class="chart-legend"><span><i class="legend-history"></i> <span id="history-label">Sample history</span></span><span><i class="legend-prediction"></i> Next-day estimate</span></div></article>
+    <article class="panel regions-panel" id="regions"><div class="section-heading"><div><p class="section-kicker">ISLAND EXPLORER</p><h2>Regional overview</h2><p id="region-sub">Select a city to explore its demo estimate.</p></div><span class="panel-icon" data-icon="globe"></span></div><div id="region-list" class="region-list"></div><button class="text-button" id="all-regions">Show all locations <span data-icon="arrow"></span></button></article></section>
+    <section class="panel about-panel" id="about"><div><p class="section-kicker">ABOUT THIS PROJECT</p><h2>From weather data to insight.</h2><p>RainScope is a frontend for the Sri Lanka Rainfall Prediction project, which aims to estimate next-day rainfall using weather data preprocessing, feature engineering, regression and ensemble learning.</p></div><a href="https://github.com/navodsamarakoon/Sri-Lanka-Rainfall-Prediction" target="_blank" rel="noopener noreferrer" class="button secondary">Project repository <span data-icon="external"></span></a></section>
+    <footer><span>RainScope © <span id="year"></span> · Sri Lanka Rainfall Prediction</span><span>Research prototype · Not for emergency decisions</span></footer>
+  </main>
+</div>
+</body></html>
